@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+        #image {
+            display: none;
+        }
+        .one{
+            border:5px solid black;
+            height:50px;
+            width:100px;
+            padding-top: 10px;
+            padding-left: 10px;
+            margin-top: 300px;
+            margin-left:700px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img id="image" 
+             src="https://etendering.tajhotels.com/guide/_images/vendor_registration_completed.png"
+             alt="image" />
+    </div>
+    <div class="one">
+    <button type="button" onclick="show()" id="btnID">
+         Register
+    </button></div>
+
+    <script>
+        function show() {
+            document.getElementById('image')
+                .style.display = "block";
+            document.getElementById('btnID')
+                .style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

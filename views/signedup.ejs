@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignedUp</title>
+    <style>
+      /* Media Queries for different screen sizes */
+
+/* Laptops and desktops */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+    }
+    .card {
+        flex: 1 1 calc(25% - 1em); /* Four columns layout */
+    }
+}
+
+/* Tablets and large phones */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .card {
+        flex: 1 1 calc(33.333% - 1em); /* Three columns layout */
+    }
+}
+
+/* Tablets and large phones */
+@media (max-width: 768px) and (min-width: 481px) {
+    .card {
+        flex: 1 1 calc(50% - 1em); /* Two columns layout */
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .card {
+        flex: 1 1 100%; /* One column layout */
+    }
+}
+    </style>
+</head>
+<body>
+    <h1>SignedUp Successfully</h1>
+    <h2>Go back to login.</h2>
+</body>
+</html>

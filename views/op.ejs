@@ -1,0 +1,414 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scheduler</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-image:url('https://t4.ftcdn.net/jpg/05/31/83/21/360_F_531832113_NvsgAJ0X7z4fpljSLteLHN0K9bN8hcGP.jpg');
+    background-repeat: no-repeat;
+        background-size: cover;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#scheduler {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.sport {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color:green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+ul.participants {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.participants li {
+    background-color: #eee;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.participants li button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+ul.participants li button:hover {
+    background-color: #e53935;
+}
+
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:lightgreen;">
+		<a style="font-size:30px;color: rgb(74, 4, 4);padding-left: 10px;text-decoration: none;" class="navbar-brand" href="#">
+		<b>SPORTS</b> <b>SCHEDULAR</b>
+		</a>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#about" style="text-decoration: none;color: rgb(74, 4, 4);margin-left :1300px;">
+					Logged in as <img style="height:40px;" alt="Click me" onclick="showEmail('<%= email %>')" src="data:image/png;base64,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">	
+				</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+		<script>
+	function showEmail(email) {
+		alert(`Logged in as: ${email}`);
+	}
+	</script>
+
+    <h1>Select sports to join</h1>
+    <div id="scheduler">
+        <div class="sport" id="soccer">
+            <h2>Soccer</h2>
+            <form onsubmit="joinSession(event, 'soccer')">
+                <label for="soccer-name">Name:</label>
+                <input type="text" id="soccer-name" required>
+                <label for="soccer-date">Joining Date:</label>
+                <input type="date" id="soccer-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="soccer-participants"></ul>
+        </div>
+        <div class="sport" id="basketball">
+            <h2>Basketball</h2>
+            <form onsubmit="joinSession(event, 'basketball')">
+                <label for="basketball-name">Name:</label>
+                <input type="text" id="basketball-name" required>
+                <label for="basketball-date">Joining Date:</label>
+                <input type="date" id="basketball-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="basketball-participants"></ul>
+        </div>
+        <div class="sport" id="tennis">
+            <h2>Tennis</h2>
+            <form onsubmit="joinSession(event, 'tennis')">
+                <label for="tennis-name">Name:</label>
+                <input type="text" id="tennis-name" required>
+                <label for="tennis-date">Joining Date:</label>
+                <input type="date" id="tennis-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="tennis-participants"></ul>
+        </div>
+    </div>
+    <script>
+function joinSession(event, sport) {
+    event.preventDefault();
+    
+    const nameInput = document.getElementById(`${sport}-name`);
+    const dateInput = document.getElementById(`${sport}-date`);
+    
+    const name = nameInput.value.trim();
+    const date = dateInput.value;
+    
+    if (name === '' || date === '') {
+        alert('Please enter both name and date.');
+        return;
+    }
+    
+    const participantsList = document.getElementById(`${sport}-participants`);
+    const newParticipant = document.createElement('li');
+    newParticipant.innerHTML = `${name} - ${date} <button onclick="removeParticipant(this)">Remove</button>`;
+    
+    participantsList.appendChild(newParticipant);
+    
+    nameInput.value = '';
+    dateInput.value = '';
+}
+
+function removeParticipant(button) {
+    const participant = button.parentElement;
+    participant.remove();
+}
+
+    </script>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Scheduler</title>
+    <style>
+        /* Your existing CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://t4.ftcdn.net/jpg/05/31/83/21/360_F_531832113_NvsgAJ0X7z4fpljSLteLHN0K9bN8hcGP.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #scheduler {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .sport {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul.participants {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul.participants li {
+            background-color: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul.participants li button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        ul.participants li button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:lightgreen;padding-top: 21px;">
+        <a style="font-size:30px;color:rgb(74, 4, 4);padding-left: 10px;text-decoration: none;" class="navbar-brand">
+        <b>SPORTS</b> <b>SCHEDULAR</b>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                    <a class="nav-link" style="text-decoration: none;color: rgb(74, 4, 4);margin-left :1100px;">
+                    Logged in as <img style="height:40px;" alt="Click me" onclick="showEmail('<%= email %>')" src="data:image/png;base64,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">	
+				</a><button style="margin-right: 50px;"><a href="/signin" style="text-decoration:none;color:rgb(74, 4, 4)">Logout</a></button>
+            </ul>
+        </div>
+    </nav>
+    <script>
+        function showEmail(email) {
+            alert(`Logged in as: ${email}`);
+        }
+    </script>
+
+    <h1>Select sports to join</h1>
+    <div id="scheduler">
+        <div class="sport" id="soccer">
+            <h2>Soccer</h2>
+            <form onsubmit="joinSession(event, 'soccer')">
+                <label for="soccer-name">Name:</label>
+                <input type="text" id="soccer-name" required>
+                <label for="soccer-date">Joining Date:</label>
+                <input type="date" id="soccer-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="soccer-participants"></ul>
+        </div>
+        <div class="sport" id="basketball">
+            <h2>Basketball</h2>
+            <form onsubmit="joinSession(event, 'basketball')">
+                <label for="basketball-name">Name:</label>
+                <input type="text" id="basketball-name" required>
+                <label for="basketball-date">Joining Date:</label>
+                <input type="date" id="basketball-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="basketball-participants"></ul>
+        </div>
+        <div class="sport" id="tennis">
+            <h2>Tennis</h2>
+            <form onsubmit="joinSession(event, 'tennis')">
+                <label for="tennis-name">Name:</label>
+                <input type="text" id="tennis-name" required>
+                <label for="tennis-date">Joining Date:</label>
+                <input type="date" id="tennis-date" required>
+                <button type="submit">Join Now</button>
+            </form>
+            <ul class="participants" id="tennis-participants"></ul>
+        </div>
+    </div>
+    <script>
+        // Function to join a session and save to localStorage
+        function joinSession(event, sport) {
+            event.preventDefault();
+
+            const nameInput = document.getElementById(`${sport}-name`);
+            const dateInput = document.getElementById(`${sport}-date`);
+
+            const name = nameInput.value.trim();
+            const date = dateInput.value;
+
+            if (name === '' || date === '') {
+                alert('Please enter both name and date.');
+                return;
+            }
+
+            const participantsList = document.getElementById(`${sport}-participants`);
+            const newParticipant = document.createElement('li');
+            newParticipant.innerHTML = `${name} - ${date} <button onclick="removeParticipant(this)">Remove</button>`;
+
+            participantsList.appendChild(newParticipant);
+
+            // Save to localStorage
+            saveParticipant(sport, name, date);
+
+            nameInput.value = '';
+            dateInput.value = '';
+           // window.location.href = 'page.ejs';
+        }
+
+        // Function to save participant to localStorage
+        function saveParticipant(sport, name, date) {
+            let participants = JSON.parse(localStorage.getItem(sport)) || [];
+            participants.push({ name, date });
+            localStorage.setItem(sport, JSON.stringify(participants));
+        }
+
+        // Function to remove participant
+        function removeParticipant(button) {
+            const participant = button.parentElement;
+            const sport = participant.parentElement.id.replace('-participants', '');
+            const nameDate = participant.innerText.split(' - ');
+
+            // Remove from localStorage
+            let participants = JSON.parse(localStorage.getItem(sport));
+            participants = participants.filter(p => p.name !== nameDate[0] && p.date !== nameDate[1]);
+            localStorage.setItem(sport, JSON.stringify(participants));
+
+            participant.remove();
+        }
+
+        // Function to load participants from localStorage
+        function loadParticipants() {
+            const sports = ['soccer', 'basketball', 'tennis'];
+            sports.forEach(sport => {
+                const participantsList = document.getElementById(`${sport}-participants`);
+                let participants = JSON.parse(localStorage.getItem(sport)) || [];
+                participants.forEach(participant => {
+                    const newParticipant = document.createElement('li');
+                    newParticipant.innerHTML = `${participant.name} - ${participant.date} <button onclick="removeParticipant(this)">Remove</button>`;
+                    participantsList.appendChild(newParticipant);
+                });
+            });
+        }
+
+        // Load participants when page loads
+        window.onload = loadParticipants;
+    </script>
+</body>
+</html>
+

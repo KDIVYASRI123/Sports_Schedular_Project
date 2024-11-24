@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-image:url('https://t4.ftcdn.net/jpg/05/31/83/21/360_F_531832113_NvsgAJ0X7z4fpljSLteLHN0K9bN8hcGP.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+  width: 400px;
+  height: 300px;
+  background-color:coral;
+  padding: 10px 30px;
+}
+
+.card_title {
+  text-align: center;
+  padding: 10px;
+}
+
+.card_title h1 {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.form input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+
+.form button {
+  background-color: #4796ff;
+  color: #ffffff;
+  font-size: 16px;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 15px;
+  width: 100%;
+}
+
+.card_terms {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.card_terms input[type="checkbox"] {
+  background-color: #e2e2e2;
+}
+
+.card_terms span {
+  margin: 5px;
+  font-size: 13px;
+}
+
+.card a {
+  color: #4796ff;
+  text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+      <div class="card" style="margin-left:-420px;width:280px;height:100px;margin-top:-80px;margin-right: 150px;">
+        <div class="card_title">
+          <h1>Choose Login type</h1>
+        </div>
+        </div>
+        <div class="card" style="margin-left:-90px;">
+          <div class="card_title">
+            <h1>Admin Login Form</h1>
+          </div>
+          <div class="form">
+          <form action="/signinsubmit1" method="GET">
+            <input type="email" name="email1" placeholder="Email" id="email1" />
+            <input type="password" name="password1" placeholder="Password" id="password1" />
+            <button>Submit</button>
+            </form><br>
+            <p>Not registered?
+              <a href="/signup"
+                 style="text-decoration: none;color:white;">
+                    Create an account
+              </a>
+        </p>
+        <div class="card" style="margin-left:450px;margin-top: -290px;">
+        <div class="card_title">
+            <h1>User Login Form</h1>
+          </div>
+          <div class="form">
+          <form action="/signinsubmit2" method="GET">
+            <input type="email" name="email2" placeholder="Email" id="email2" />
+            <input type="password" name="password2" placeholder="Password" id="password2" />
+            <button>Submit</button>
+            </form><br>
+            <p>Not registered?
+              <a href="/signup"
+                 style="text-decoration: none;color:white;">
+                    Create an account
+              </a>
+        </p>
+          <div class="card_terms">
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+</html>
+
